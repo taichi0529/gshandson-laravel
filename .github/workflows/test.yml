@@ -3,6 +3,7 @@ name: teg api test
 on:
   pull_request:
     branches:
+      - main
       - develop
 # laravelのFeatureテストを行う
 jobs: 
