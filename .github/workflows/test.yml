@@ -1,0 +1,27 @@
+name: teg api test
+
+on:
+  pull_request:
+    branches:
+      - develop
+# laravelのFeatureテストを行う
+jobs: 
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Set up PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.2'
+      - name: Install dependencies
+        uses: php-actions/composer@v6
+        with:
+          php_version: "8.2"
+      - name: Create .env
+        run: cp .env.example .env
+      - name: Generate key
+        run: php artisan key:generate
+      - name: Run tests
+        run: php artisan test
