@@ -1,0 +1,23 @@
+name: Staging Deploy
+
+on:
+  push:
+    branches:
+      - example
+jobs:
+  deploy:
+    name: Capistrano Deploy to Staging
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: ssh and deploy
+        uses: appleboy/ssh-action@master@@v1.0.3
+        with:
+          host: 35.77.107.39
+          username: www-data
+          key: ${{ secrets.SSH_KEY }}
+          port: 22
+          script: |
+            cd /var/www/laravel
+            git pull origin example
