@@ -1,4 +1,4 @@
-name: teg api test
+name: test example
 
 on:
   pull_request:
